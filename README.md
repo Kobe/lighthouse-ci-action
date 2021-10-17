@@ -457,6 +457,41 @@ jobs:
 
 </details>
 
+<details>
+  <summary>GitHub Action workflow on self-hosted GitHub runner (e.g. on-premise)</summary>
+  
+#### main.yml  
+  
+```yml
+name: Lighthouse CI
+on: push
+jobs:
+  lighthouse:
+    runs-on: [self-hosted, your-custom-label]
+    steps:
+      - uses: actions/checkout@v2
+      - name: install Node.js
+
+      - uses: browser-actions/setup-chrome@latest
+
+      - run: chrome --version
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{YOUR_REQUIRED_NODE_JS_VERSION}}
+
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v8
+        with:
+          urls: |
+            https://example.com/
+            https://example.com/blog
+        [...]
+```
+
+[Learn more about hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners)  
+  
+</details>
+
 Explore more workflows in [public examples](./.github/workflows).
 Submit a pull request with a new one if they don't cover your use case.
 
